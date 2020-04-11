@@ -1,6 +1,5 @@
-# adaptiveDijkstra #
-
-### Adaptive Dijkstra algorithm for the horizontal free-flight problem. ###
+## adaptiveDijkstra ##
+Adaptive Dijkstra algorithm for the horizontal free-flight problem. 
 
 ## Installing adaptiveDijkstra ##
 
