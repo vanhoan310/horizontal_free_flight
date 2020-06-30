@@ -239,6 +239,7 @@ const double& y2, const double& dx,const double& dy ,double & arclength)
 // 		cout << endl;
     return;
 }
+
 void runAlgorithm(string filename)
 {	
 	bool printStatistic = true;
@@ -307,16 +308,17 @@ void runAlgorithm(string filename)
 	}
     cout << " ... finish reading data! \n";	
     // Input source and target 
-	double fromPointxvec[] = {15000.0};//
-	double fromPointyvec[] = {6000.0};//
+    double redF = 4.0;
+	double fromPointxvec[] = {15000.0/redF, 0.0};//
+	double fromPointyvec[] = {6000.0/redF, 0.0};//
 	
-	double toPointxvec[] =   {-7000.0};//
-	double toPointyvec[] =   {5000.0};//
+	double toPointxvec[] =   {-7000.0/redF, 10000.0/redF};//
+	double toPointyvec[] =   {5000.0/redF, 10000.0/redF};//
 	
 	int iterSize = (sizeof(fromPointxvec)/sizeof(*fromPointxvec));
 	
     int stageCount = 0;
-	for (int numberofStage = 4; numberofStage < 7; ++ numberofStage) // 3-7
+	for (int numberofStage = 3; numberofStage < 7; ++ numberofStage) // 3-7
 	{	
 		double astarFactor = 1;	
 		std::vector<double> time1,time2;
@@ -413,13 +415,14 @@ void runAlgorithm(string filename)
 	infile.close();
 	infile.clear();
 }
+
 int main(int argc, char* argv[])
 {    
 	// check arguments
     if (argc > 3 || argc < 2) {
         cout << "Wrong argument!\n";
-        cout << "E.g: ./adaptiveDijkstra -gendata filename.txt: to generate a sample data\n";
-        cout << "     ./adaptiveDijkstra filename.txt         : to run algorithm on filename.txt\n";
+        cout << "E.g: ./mastar -gendata filename.txt: to generate a sample data\n";
+        cout << "     ./mastar filename.txt         : to run algorithm on filename.txt\n";
     } 
     else if (argc == 3){
         clock_t t1,t2;
@@ -428,8 +431,12 @@ int main(int argc, char* argv[])
         // Generate a simple dataset 
         cout << "Start generating an instance ... \n";
     	int    numxNodes 	=  513; 	int numyNodes = 257;
-    	double xmin = -20000.0, xmax = 20000.0, ymin = -10000.0, ymax = 10000.0;
-    	double radius = 1280.0;
+    	// double xmin = -20000.0, xmax = 20000.0, ymin = -10000.0, ymax = 10000.0;//original
+    	// double radius = 1280.0; // original
+
+        double redF = 4.0;
+    	double xmin = -20000.0/redF, xmax = 20000.0/redF, ymin = -10000.0/redF, ymax = 10000.0/redF;
+    	double radius = 1280.0/redF; 
     	MakeGraph datafile(filename, numxNodes, numyNodes, xmin, xmax, ymin, ymax, radius);
     	datafile.makeGraphData();
 

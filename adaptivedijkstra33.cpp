@@ -246,6 +246,7 @@ void AdaptDijkstra::constructParentNodes()
 		}}		
 	}
 }
+
 void AdaptDijkstra::init (Node s, Node t) // Initialize the data
 {
 	
@@ -419,6 +420,7 @@ vector<Node> AdaptDijkstra::getShortestPath()
 	}
 	return _path_Nodes;
 } */
+
 inline int AdaptDijkstra::ipow(int base, int exp)
 {
 	int result = 1;
@@ -432,14 +434,17 @@ inline int AdaptDijkstra::ipow(int base, int exp)
 	
 	return result;
 }
+
 double AdaptDijkstra::getShortestDistance()
 {
 	return _shortest_distance;
 }
+
 double AdaptDijkstra::getRunTime()
 {
 	return _runtime;
 }
+
 double AdaptDijkstra::calculateDistance(ListDigraph::NodeMap<lemon::dim2::Point<double>>& coordbase,
 	Node currentNode, Node sinkNode) 
 {
@@ -447,6 +452,7 @@ double AdaptDijkstra::calculateDistance(ListDigraph::NodeMap<lemon::dim2::Point<
 	const double x2 = coordbase[sinkNode].x,    y2 = coordbase[sinkNode].y;
 	return sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
 }
+
 void AdaptDijkstra::printShortestPath(std::ofstream& outdata)
 {
 	outdata << "x =[";  
@@ -511,46 +517,46 @@ void MakeGraph::getGroundDistance(const double& x1,const double& y1,const double
     double distance2P = distance2Points(x1,y1,x2,y2);
     double cosAngle = (y2-y1)/distance2P, sinAngle = (x2-x1)/distance2P;
     arclength = 0.0; arclengthv2 = 0.0;     
-if (x1==x2)
-{ 
-        if (y1==y2) return;
-//         int columnNum = round((x1-_xmin)/dx);
-//         int startRow = round((miny-_ymin)/dy);
-        int maxIter = round((maxy-miny)/dy);
-        for (int i=0;i< maxIter;++i)
-	{
-		double wEast  = getWindEast(x1,miny + i*dy+.5*dy);
-		double wNorth = getWindNorth(x1,miny + i*dy+.5*dy);
-		wCross = -wEast*cosAngle+wNorth*sinAngle;
-		wTrack =  wEast*sinAngle+wNorth*cosAngle; 
-		temp = sqrt(vPlane*vPlane - wCross*wCross);
-		arclength   += dy/(temp+wTrack);
-		arclengthv2 += dy/(temp-wTrack);
-	}
-	arclength = arclength*vPlane;
-	arclengthv2 = arclengthv2*vPlane;
-	return;
-}
+    if (x1==x2)
+    { 
+            if (y1==y2) return;
+    //         int columnNum = round((x1-_xmin)/dx);
+    //         int startRow = round((miny-_ymin)/dy);
+            int maxIter = round((maxy-miny)/dy);
+            for (int i=0;i< maxIter;++i)
+        {
+            double wEast  = getWindEast(x1,miny + i*dy+.5*dy);
+            double wNorth = getWindNorth(x1,miny + i*dy+.5*dy);
+            wCross = -wEast*cosAngle+wNorth*sinAngle;
+            wTrack =  wEast*sinAngle+wNorth*cosAngle; 
+            temp = sqrt(vPlane*vPlane - wCross*wCross);
+            arclength   += dy/(temp+wTrack);
+            arclengthv2 += dy/(temp-wTrack);
+        }
+        arclength = arclength*vPlane;
+        arclengthv2 = arclengthv2*vPlane;
+        return;
+    }
     
-if (y1==y2)
-{
-	int rowNum = round(y1/dy);
-	int startColumn = round(minx/dx);
-	int maxIter = round((maxx-minx)/dx);
-	for (int i=0;i<maxIter;++i)
-	{		
-		double wEast  = getWindEast (y1,minx + i*dx + 0.5*dx);
-		double wNorth = getWindNorth(y1,minx + i*dx + 0.5*dx);
-		wCross = -wEast*cosAngle+wNorth*sinAngle;
-		wTrack =  wEast*sinAngle+wNorth*cosAngle; 
-		temp = sqrt(vPlane*vPlane - wCross*wCross);
-		arclength += dx/(temp+wTrack);
-		arclengthv2 += dx/(temp-wTrack);
-	}
-	arclength = arclength*vPlane;
-	arclengthv2 = arclengthv2*vPlane;
-	return;
-}
+    if (y1==y2)
+    {
+        int rowNum = round(y1/dy);
+        int startColumn = round(minx/dx);
+        int maxIter = round((maxx-minx)/dx);
+        for (int i=0;i<maxIter;++i)
+        {		
+            double wEast  = getWindEast (y1,minx + i*dx + 0.5*dx);
+            double wNorth = getWindNorth(y1,minx + i*dx + 0.5*dx);
+            wCross = -wEast*cosAngle+wNorth*sinAngle;
+            wTrack =  wEast*sinAngle+wNorth*cosAngle; 
+            temp = sqrt(vPlane*vPlane - wCross*wCross);
+            arclength += dx/(temp+wTrack);
+            arclengthv2 += dx/(temp-wTrack);
+        }
+        arclength = arclength*vPlane;
+        arclengthv2 = arclengthv2*vPlane;
+        return;
+    }
     
 	vector<double> v1, v2, vectorMerged;
 	int xIter = round((maxx-minx)/dx);
@@ -596,7 +602,6 @@ if (y1==y2)
 	arclength = arclength*vPlane;
 	arclengthv2 = arclengthv2*vPlane;
 }
-
 //v
 double MakeGraph::getWindNorth(double x,double y) { return 0.5*((-2000.0-x)*exp(-(pow(x+2000.0,2) + pow(y-7000.0,2))/2000000.0));} 
 //u
@@ -707,19 +712,5 @@ void MakeGraph::makeGraphData()
 	outdata << "The shortest path is \n";
 	outdata.close();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
