@@ -13,7 +13,7 @@ make
 
 ## Running adaptiveDijkstra ##
 
-To generate a sample dataset, e.g testdata.txt
+To generate a grid graph , e.g., testdata.txt
 ```
 ./mastar -gendata testdata.txt
 ```
