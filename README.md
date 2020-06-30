@@ -1,4 +1,4 @@
-## Multi-leval A* algorithm ##
+## Multi-level A* algorithm ##
 Multi-level A* algorithm for the horizontal free-flight problem. 
 
 ## Installing the package ##
