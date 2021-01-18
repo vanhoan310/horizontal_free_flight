@@ -1,5 +1,5 @@
-## Multi-level A* algorithm ##
-Multi-level A* algorithm for the horizontal free-flight problem. 
+## Multi-level elliptic Dijkstra’s algorithm (MEDA) ##
+Multi-level elliptic Dijkstra’s algorithm (MEDA) for the horizontal free-flight problem. 
 
 ## Installing the package ##
 
@@ -15,10 +15,10 @@ make
 
 To generate a grid graph , e.g., testdata.txt
 ```
-./mastar -gendata testdata.txt
+./meda -gendata testdata.txt
 ```
 
 To run the algorithm on data testdata.txt
 ```
-./mastar testdata.txt
+./meda testdata.txt
 ```
